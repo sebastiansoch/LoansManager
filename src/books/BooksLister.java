@@ -5,6 +5,8 @@
  */
 package books;
 
+import books.printouts.Printer;
+import books.filters.Filter;
 import java.io.IOException;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -18,52 +20,31 @@ import java.util.List;
 public class BooksLister {
 
     private final List<LoanedBook> loanedBooks;
-    private LocalDate date = LocalDate.now();
+    
     private List<Filter> filters;
+    private final Printer printout;
 
-    public BooksLister(List<LoanedBook> loanedBooks) {
+    public BooksLister(List<LoanedBook> loanedBooks, Printer printout) {
         this.loanedBooks = loanedBooks;
         filters = new ArrayList<>();
+        this.printout = printout;
     }
 
     public void getBooks() {
-        StringBuilder builder = getHeader();
+        List<LoanedBook> filteredBooks = new ArrayList<>();
+        
         for (LoanedBook loanedBookInfo : loanedBooks) {
             for (Filter filter : filters) {
                 if (filter.isMeetingCriteria(loanedBookInfo)) {
-                    builder.append(getPrintLine(loanedBookInfo));
+                    filteredBooks.add(loanedBookInfo);
                 }
             }
         }
-        System.out.println(builder);
+        
+        printout.print(filteredBooks);
     }
 
-    private StringBuilder getHeader() {
-        StringBuilder builder = new StringBuilder("Lista wypożyczonych książek");
-        builder.append("\n");
-        builder.append("Książka");
-        builder.append("\t\t");
-        builder.append("Osoba");
-        builder.append("\t\t");
-        builder.append("Data wypożyczenia");
-        builder.append("\t");
-        builder.append("Okres przetrzymywania");
-        builder.append("\n");
-        return builder;
-    }
 
-    private StringBuilder getPrintLine(LoanedBook loanedBookInfo) {
-        StringBuilder builder = new StringBuilder();
-        builder.append(loanedBookInfo.getBook());
-        builder.append("\t\t");
-        builder.append(loanedBookInfo.getPerson());
-        builder.append("\t\t");
-        builder.append(loanedBookInfo.getLoanDate());
-        builder.append("\t\t");
-        builder.append(DAYS.between(loanedBookInfo.getLoanDate(), date));
-        builder.append("\n");
-        return builder;
-    }
 
     void addFilter(Filter filter) {
         this.filters.add(filter);

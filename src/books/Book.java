@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author ssoch
  */
-class Book {
+public class Book {
     private String title;
 
     public Book(String title) {

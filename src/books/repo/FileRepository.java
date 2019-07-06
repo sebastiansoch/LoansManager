@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books;
+package books.repo;
 
+import books.Book;
+import books.LoanedBook;
+import books.Person;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;

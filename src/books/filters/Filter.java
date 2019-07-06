@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books;
+package books.filters;
 
-import java.io.IOException;
-import java.util.List;
+import books.LoanedBook;
 
 /**
  *
  * @author ssoch
  */
-interface BooksRepository {
-    public List<LoanedBook> prepareLoanedBooksList() throws IOException;
+public interface Filter {
+    boolean isMeetingCriteria(LoanedBook loanedBookInfo);
 }

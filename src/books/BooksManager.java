@@ -5,6 +5,13 @@
  */
 package books;
 
+import books.repo.FileRepository;
+import books.repo.BooksRepository;
+import books.printouts.CSVPrint;
+import books.printouts.Printer;
+import books.filters.BookFilter;
+import books.filters.Filter;
+import books.filters.PersonFilter;
 import java.io.File;
 import java.io.IOException;
 
@@ -21,7 +28,10 @@ public class BooksManager {
         File file = new File("res/loanedBooks.txt");
         BooksRepository repository = new FileRepository(file);
 
-        BooksLister booksLister = new BooksLister(repository.prepareLoanedBooksList());
+//        Printer printout = new ElegancePrint();
+        Printer printout = new CSVPrint();
+       
+        BooksLister booksLister = new BooksLister(repository.prepareLoanedBooksList(), printout);
         Filter filter = null;
         
         Person person = new Person("Seba");
@@ -32,14 +42,7 @@ public class BooksManager {
         booksLister.addFilter(filter);
         booksLister.getBooks();
 
-//        Book book = new Book("Wedźmin");
-//        filter = new BookFilter(book);
-//        booksLister.addFilter(filter);
-//        booksLister.getBooks();
-//
-//        filter = new AllBooksFilter();
-//        booksLister.addFilter(filter);
-//        booksLister.getBooks();
+        
 
     }
 

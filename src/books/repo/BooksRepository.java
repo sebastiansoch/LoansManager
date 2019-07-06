@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books;
+package books.repo;
 
-import books.filters.Filter;
+import books.LoanedBook;
+import java.io.IOException;
+import java.util.List;
 
 /**
  *
  * @author ssoch
  */
-public class AllBooksFilter implements Filter {
-
-    @Override
-    public boolean isMeetingCriteria(LoanedBook loanedBookInfo) {
-        return true;
-    }
-    
+public interface BooksRepository {
+    public List<LoanedBook> prepareLoanedBooksList() throws IOException;
 }
