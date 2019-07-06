@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package manager;
+package loans.manager;
 
 import books.Book;
 import books.BooksLister;
@@ -22,7 +22,7 @@ import java.io.IOException;
  *
  * @author ssoch
  */
-public class Manager {
+public class LoansManager {
 
     /**
      * @param args the command line arguments
