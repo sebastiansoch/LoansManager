@@ -6,7 +6,6 @@
 package loans.manager;
 
 import books.LoanedBook;
-import loans.manager.printouts.Printer;
 import loans.manager.Filter;
 import java.util.ArrayList;
 import java.util.List;

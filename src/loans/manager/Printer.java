@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package loans.manager.printouts;
+package loans.manager;
 
 import books.LoanedBook;
 import java.util.List;

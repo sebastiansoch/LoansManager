@@ -6,8 +6,7 @@
 package loans.manager;
 
 import books.Person;
-import loans.manager.printouts.CSVPrint;
-import loans.manager.printouts.Printer;
+import books.printouts.CSVPrint;
 import books.filters.PersonFilter;
 import java.io.File;
 import java.io.IOException;
@@ -29,7 +28,7 @@ public class LoansManager {
 
         File file = new File("res/loanedMoney.txt");
         Repository repository = new FileMoneyRepository(file);
-        Printer printout = new CSVPrint();
+        Printer printout = new money.printouts.CSVPrint();
 
         GoodsLister booksLister = new GoodsLister(repository.prepareLoanedGoodsList(), printout);
         Filter filter = null;

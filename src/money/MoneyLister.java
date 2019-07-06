@@ -5,7 +5,7 @@
  */
 package money;
 
-import loans.manager.printouts.Printer;
+import loans.manager.Printer;
 import java.util.ArrayList;
 import java.util.List;
 import loans.manager.Filter;

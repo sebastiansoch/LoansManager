@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package loans.manager.printouts;
+package books.printouts;
 
+import loans.manager.Printer;
 import books.LoanedBook;
 import java.time.LocalDate;
 import static java.time.temporal.ChronoUnit.DAYS;
@@ -14,12 +15,11 @@ import java.util.List;
  *
  * @author ssoch
  */
-public class ElegancePrint implements Printer<LoanedBook> {
-
-    private LocalDate date = LocalDate.now();
-
-    public ElegancePrint() {
+public class CSVPrint implements Printer<LoanedBook> {
+private LocalDate date = LocalDate.now();
+    public CSVPrint() {
     }
+
     @Override
     public void print(List<LoanedBook> filteredBooks) {
         StringBuilder builder = getHeader();
@@ -28,18 +28,17 @@ public class ElegancePrint implements Printer<LoanedBook> {
         }
         System.out.println(builder);
     }
-
-
+ 
     
-    private  StringBuilder getHeader() {
+        private  StringBuilder getHeader() {
         StringBuilder builder = new StringBuilder("Lista wypożyczonych książek");
         builder.append("\n");
         builder.append("Książka");
-        builder.append("\t\t");
+        builder.append(";");
         builder.append("Osoba");
-        builder.append("\t\t");
+        builder.append(";");
         builder.append("Data wypożyczenia");
-        builder.append("\t");
+        builder.append(";");
         builder.append("Okres przetrzymywania");
         builder.append("\n");
         return builder;
@@ -48,15 +47,14 @@ public class ElegancePrint implements Printer<LoanedBook> {
     private  StringBuilder getPrintLine(LoanedBook loanedBookInfo) {
         StringBuilder builder = new StringBuilder();
         builder.append(loanedBookInfo.getBook());
-        builder.append("\t\t");
+        builder.append(";");
         builder.append(loanedBookInfo.getPerson());
-        builder.append("\t\t");
+        builder.append(";");
         builder.append(loanedBookInfo.getLoanDate());
-        builder.append("\t\t");
+        builder.append(";");
         builder.append(DAYS.between(loanedBookInfo.getLoanDate(), date));
         builder.append("\n");
         return builder;
     }
-
 
 }
