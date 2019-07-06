@@ -3,8 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books;
+package manager;
 
+import books.Book;
+import books.BooksLister;
+import books.Person;
 import books.repo.FileRepository;
 import books.repo.BooksRepository;
 import books.printouts.CSVPrint;
@@ -19,7 +22,7 @@ import java.io.IOException;
  *
  * @author ssoch
  */
-public class BooksManager {
+public class Manager {
 
     /**
      * @param args the command line arguments

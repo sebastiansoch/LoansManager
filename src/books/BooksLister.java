@@ -7,9 +7,6 @@ package books;
 
 import books.printouts.Printer;
 import books.filters.Filter;
-import java.io.IOException;
-import java.time.LocalDate;
-import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +43,7 @@ public class BooksLister {
 
 
 
-    void addFilter(Filter filter) {
+    public void addFilter(Filter filter) {
         this.filters.add(filter);
     }
 }
