@@ -5,11 +5,8 @@
  */
 package books;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import static java.time.temporal.ChronoUnit.DAYS;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,36 +19,20 @@ public class BooksLister {
 
     private final List<LoanedBook> loanedBooks;
     private LocalDate date = LocalDate.now();
+    private List<Filter> filters;
 
     public BooksLister(List<LoanedBook> loanedBooks) {
         this.loanedBooks = loanedBooks;
+        filters = new ArrayList<>();
     }
 
-    public void listAllLoanedBooks() throws IOException {
-        StringBuilder builder = getHeader();
-
-        for (LoanedBook loanedBookInfo : loanedBooks) {
-            builder.append(getPrintLine(loanedBookInfo));
-        }
-
-        System.out.println(builder);
-    }
-
-    public void getBooksForPerson(Person person) {
+    public void getBooks() {
         StringBuilder builder = getHeader();
         for (LoanedBook loanedBookInfo : loanedBooks) {
-            if (loanedBookInfo.getPerson().equals(person)) {
-                builder.append(getPrintLine(loanedBookInfo));
-            }
-        }
-        System.out.println(builder);
-    }
-
-    public void getPersonsForBook(Book book) {
-        StringBuilder builder = getHeader();
-        for (LoanedBook loanedBookInfo : loanedBooks) {
-            if (loanedBookInfo.getBook().equals(book)) {
-                builder.append(getPrintLine(loanedBookInfo));
+            for (Filter filter : filters) {
+                if (filter.isMeetingCriteria(loanedBookInfo)) {
+                    builder.append(getPrintLine(loanedBookInfo));
+                }
             }
         }
         System.out.println(builder);
@@ -82,5 +63,9 @@ public class BooksLister {
         builder.append(DAYS.between(loanedBookInfo.getLoanDate(), date));
         builder.append("\n");
         return builder;
+    }
+
+    void addFilter(Filter filter) {
+        this.filters.add(filter);
     }
 }

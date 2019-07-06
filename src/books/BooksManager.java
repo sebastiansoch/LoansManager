@@ -7,9 +7,6 @@ package books;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.util.List;
 
 /**
  *
@@ -23,16 +20,27 @@ public class BooksManager {
     public static void main(String[] args) throws IOException {
         File file = new File("res/loanedBooks.txt");
         BooksRepository repository = new FileRepository(file);
-        BooksLister  booksLister = new BooksLister(repository.prepareLoanedBooksList());
-        
-        booksLister.listAllLoanedBooks();
 
-        Person person = new Person("Seba");
-        booksLister.getBooksForPerson(person);
+        BooksLister booksLister = new BooksLister(repository.prepareLoanedBooksList());
+        Filter filter = null;
         
+        Person person = new Person("Seba");
+        filter = new PersonFilter(person);
+        booksLister.addFilter(filter);
         Book book = new Book("Wedźmin");
-        booksLister.getPersonsForBook(book);
+        filter = new BookFilter(book);
+        booksLister.addFilter(filter);
+        booksLister.getBooks();
+
+//        Book book = new Book("Wedźmin");
+//        filter = new BookFilter(book);
+//        booksLister.addFilter(filter);
+//        booksLister.getBooks();
+//
+//        filter = new AllBooksFilter();
+//        booksLister.addFilter(filter);
+//        booksLister.getBooks();
+
     }
-    
-    
+
 }
