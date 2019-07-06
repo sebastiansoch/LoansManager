@@ -22,10 +22,16 @@ public class BooksManager {
      */
     public static void main(String[] args) throws IOException {
         File file = new File("res/loanedBooks.txt");
-        BooksLister  booksLister = new BooksLister(file);
+        BooksRepository repository = new FileRepository(file);
+        BooksLister  booksLister = new BooksLister(repository.prepareLoanedBooksList());
         
         booksLister.listAllLoanedBooks();
 
+        Person person = new Person("Seba");
+        booksLister.getBooksForPerson(person);
+        
+        Book book = new Book("Wedźmin");
+        booksLister.getPersonsForBook(book);
     }
     
     

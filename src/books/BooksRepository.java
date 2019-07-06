@@ -5,10 +5,13 @@
  */
 package books;
 
+import java.io.IOException;
+import java.util.List;
+
 /**
  *
  * @author ssoch
  */
-public class Helper {
-    
+interface BooksRepository {
+    public List<LoanedBook> prepareLoanedBooksList() throws IOException;
 }

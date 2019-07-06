@@ -20,13 +20,44 @@ import java.util.List;
  */
 public class BooksLister {
 
-    private final File booksFile;
+    private final List<LoanedBook> loanedBooks;
+    private LocalDate date = LocalDate.now();
 
-    public BooksLister(File booksFile) {
-        this.booksFile = booksFile;
+    public BooksLister(List<LoanedBook> loanedBooks) {
+        this.loanedBooks = loanedBooks;
     }
 
     public void listAllLoanedBooks() throws IOException {
+        StringBuilder builder = getHeader();
+
+        for (LoanedBook loanedBookInfo : loanedBooks) {
+            builder.append(getPrintLine(loanedBookInfo));
+        }
+
+        System.out.println(builder);
+    }
+
+    public void getBooksForPerson(Person person) {
+        StringBuilder builder = getHeader();
+        for (LoanedBook loanedBookInfo : loanedBooks) {
+            if (loanedBookInfo.getPerson().equals(person)) {
+                builder.append(getPrintLine(loanedBookInfo));
+            }
+        }
+        System.out.println(builder);
+    }
+
+    public void getPersonsForBook(Book book) {
+        StringBuilder builder = getHeader();
+        for (LoanedBook loanedBookInfo : loanedBooks) {
+            if (loanedBookInfo.getBook().equals(book)) {
+                builder.append(getPrintLine(loanedBookInfo));
+            }
+        }
+        System.out.println(builder);
+    }
+
+    private StringBuilder getHeader() {
         StringBuilder builder = new StringBuilder("Lista wypożyczonych książek");
         builder.append("\n");
         builder.append("Książka");
@@ -37,31 +68,19 @@ public class BooksLister {
         builder.append("\t");
         builder.append("Okres przetrzymywania");
         builder.append("\n");
-        LocalDate date = LocalDate.now();
-
-        for (LoanedBook book : prepareLoanedBooksList()) {
-            builder.append(book.getBook());
-            builder.append("\t\t");
-            builder.append(book.getPerson());
-            builder.append("\t\t");
-            builder.append(book.getLoanDate());
-            builder.append("\t\t");
-            builder.append(DAYS.between(book.getLoanDate(), date));
-            builder.append("\n");
-        }
-        
-        System.out.println(builder);
+        return builder;
     }
 
-    private List<LoanedBook> prepareLoanedBooksList() throws IOException {
-        List<String> readAllLines = Files.readAllLines(booksFile.toPath());
-        List<LoanedBook> loanedBooks = new ArrayList<>();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        for (String line : readAllLines) {
-            String[] split = line.split("\\|");
-            loanedBooks.add(new LoanedBook(new Book(split[0]), new Person(split[1]), LocalDate.parse(split[2], formatter)));
-        }
-        return loanedBooks;
+    private StringBuilder getPrintLine(LoanedBook loanedBookInfo) {
+        StringBuilder builder = new StringBuilder();
+        builder.append(loanedBookInfo.getBook());
+        builder.append("\t\t");
+        builder.append(loanedBookInfo.getPerson());
+        builder.append("\t\t");
+        builder.append(loanedBookInfo.getLoanDate());
+        builder.append("\t\t");
+        builder.append(DAYS.between(loanedBookInfo.getLoanDate(), date));
+        builder.append("\n");
+        return builder;
     }
-
 }
