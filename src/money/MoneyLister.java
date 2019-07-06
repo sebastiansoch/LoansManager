@@ -3,45 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books;
+package money;
 
-import books.printouts.Printer;
-import books.filters.Filter;
+import loans.manager.printouts.Printer;
 import java.util.ArrayList;
 import java.util.List;
+import loans.manager.Filter;
 
 /**
  *
  * @author ssoch
  */
-public class BooksLister {
+public class MoneyLister {
 
-    private final List<LoanedBook> loanedBooks;
+    private final List<LoanedMoney> loanedMoney;
     
     private List<Filter> filters;
     private final Printer printout;
 
-    public BooksLister(List<LoanedBook> loanedBooks, Printer printout) {
-        this.loanedBooks = loanedBooks;
+    public MoneyLister(List<LoanedMoney> loanedMoney, Printer printout) {
+        this.loanedMoney = loanedMoney;
         filters = new ArrayList<>();
         this.printout = printout;
     }
 
-    public void getBooks() {
-        List<LoanedBook> filteredBooks = new ArrayList<>();
+    public void getMoney() {
+        List<LoanedMoney> filteredMoney = new ArrayList<>();
         
-        for (LoanedBook loanedBookInfo : loanedBooks) {
+        for (LoanedMoney loanedMoneyInfo : loanedMoney) {
             for (Filter filter : filters) {
-                if (filter.isMeetingCriteria(loanedBookInfo)) {
-                    filteredBooks.add(loanedBookInfo);
+                if (filter.isMeetingCriteria(loanedMoneyInfo)) {
+                    filteredMoney.add(loanedMoneyInfo);
                 }
             }
         }
         
-        printout.print(filteredBooks);
+        printout.print(filteredMoney);
     }
-
-
 
     public void addFilter(Filter filter) {
         this.filters.add(filter);

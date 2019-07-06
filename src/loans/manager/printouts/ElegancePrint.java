@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books.printouts;
+package loans.manager.printouts;
 
 import books.LoanedBook;
 import java.time.LocalDate;
@@ -14,7 +14,7 @@ import java.util.List;
  *
  * @author ssoch
  */
-public class ElegancePrint implements Printer {
+public class ElegancePrint implements Printer<LoanedBook> {
 
     private LocalDate date = LocalDate.now();
 

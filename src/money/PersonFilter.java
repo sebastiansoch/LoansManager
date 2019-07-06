@@ -3,17 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books.filters;
+package money;
 
 import loans.manager.Filter;
-import books.LoanedBook;
-import books.Person;
+import money.LoanedMoney;
+import money.Person;
 
 /**
  *
  * @author ssoch
  */
-public class PersonFilter implements Filter<LoanedBook> {
+public class PersonFilter implements Filter<LoanedMoney> {
 
     private final Person person;
 
@@ -22,13 +22,11 @@ public class PersonFilter implements Filter<LoanedBook> {
     }
     
     @Override
-    public boolean isMeetingCriteria(LoanedBook loanedBookInfo) {
+    public boolean isMeetingCriteria(LoanedMoney loanedBookInfo) {
         if (person.equals(loanedBookInfo.getPerson())) {
             return true;
         }
         
         return false;
     }
-
-    
 }

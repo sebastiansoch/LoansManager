@@ -5,6 +5,7 @@
  */
 package books.filters;
 
+import loans.manager.Filter;
 import books.Book;
 import books.LoanedBook;
 
@@ -12,7 +13,7 @@ import books.LoanedBook;
  *
  * @author ssoch
  */
-public class BookFilter implements Filter {
+public class BookFilter implements Filter<LoanedBook> {
 
     private final Book book;
 
@@ -28,5 +29,4 @@ public class BookFilter implements Filter {
 
         return false;
     }
-
 }

@@ -6,13 +6,13 @@
 package books.filters;
 
 import books.LoanedBook;
-import books.filters.Filter;
+import loans.manager.Filter;
 
 /**
  *
  * @author ssoch
  */
-public class AllBooksFilter implements Filter {
+public class AllBooksFilter implements Filter<LoanedBook> {
 
     @Override
     public boolean isMeetingCriteria(LoanedBook loanedBookInfo) {

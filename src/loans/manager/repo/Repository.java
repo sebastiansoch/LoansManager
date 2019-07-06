@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books.printouts;
+package loans.manager.repo;
 
 import books.LoanedBook;
+import java.io.IOException;
 import java.util.List;
 
 /**
  *
  * @author ssoch
  */
-public interface Printer {
-
-    public void print(List<LoanedBook> filteredBooks);
-
-   
+public interface Repository<T> {
+    public List<T> prepareLoanedGoodsList() throws IOException;
 }

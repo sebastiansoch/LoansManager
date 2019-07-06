@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package books.repo;
+package loans.manager.repo;
 
 import books.Book;
 import books.LoanedBook;
@@ -20,16 +20,16 @@ import java.util.List;
  *
  * @author ssoch
  */
-public class FileRepository implements BooksRepository {
+public class FileBooksRepository implements Repository<LoanedBook> {
 
     private final File booksFile;
 
-    public FileRepository(File booksFile) {
+    public FileBooksRepository(File booksFile) {
         this.booksFile = booksFile;
     }
 
     @Override
-    public List<LoanedBook> prepareLoanedBooksList() throws IOException {
+    public List<LoanedBook> prepareLoanedGoodsList() throws IOException {
         List<String> readAllLines = Files.readAllLines(booksFile.toPath());
         List<LoanedBook> loanedBooks = new ArrayList<>();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -43,4 +43,5 @@ public class FileRepository implements BooksRepository {
         }
         return loanedBooks;
     }
+
 }
